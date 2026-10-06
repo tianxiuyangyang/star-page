@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080a12">
+<title>我们的星页 · 从今天起，故事有了新主角</title>
+<meta name="description" content="从今天起，故事有了新主角。">
+<meta property="og:title" content="我们的星页">
+<meta property="og:description" content="从今天起，故事有了新主角。">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='16' y='24' text-anchor='middle' font-size='23' fill='%23e8a0a8'%3E%E2%99%A5%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="locked">
+
+<!-- ============ 背景层 ============ -->
+<div class="bg" aria-hidden="true"></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ 顶栏 ============ -->
+<header class="topbar" id="topbar">
+  <button class="brand" id="brandBtn" type="button" title="回到开头">
+    <span class="brand-cn">我们的星页</span>
+    <span class="brand-en">OUR STAR PAGE</span>
+  </button>
+  <button class="sound" id="soundBtn" type="button" aria-pressed="true" title="音效开关">
+    <svg class="ico ico-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h3.2L12 19V5L7.2 9H4z"/><path d="M15.4 8.6a4.6 4.6 0 0 1 0 6.8"/><path d="M17.8 6.2a8 8 0 0 1 0 11.6"/></svg>
+    <svg class="ico ico-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h3.2L12 19V5L7.2 9H4z"/><path d="M16 9.5l4 5M20 9.5l-4 5"/></svg>
+    <span class="sound-label">音效</span>
+  </button>
+</header>
+
+<!-- ============ 侧边导航点 ============ -->
+<nav class="dots" id="dots" aria-label="章节导航"></nav>
+
+<!-- ============ 1. 首页开场 ============ -->
+<section class="cover" id="cover">
+  <span class="cover-glow" aria-hidden="true"></span>
+  <div class="cover-inner">
+    <p class="kicker" id="coverKicker">OUR STAR PAGE</p>
+    <h1 class="cover-line" id="coverLine">从今天起，<br>故事有了新主角</h1>
+    <p class="cover-date">
+      <span class="cd-prefix" id="coverDatePrefix">故事开始于</span>
+      <span class="cd-time" id="coverDate">2026.10.06</span>
+    </p>
+    <p class="cover-hint" id="coverHint"><i class="dot"></i><span>轻触任意位置 · 进入我们的星页</span></p>
+  </div>
+</section>
+
+<!-- ============ 正文 ============ -->
+<main id="main" aria-hidden="true">
+
+<!-- 2. 我们俩 -->
+  <section class="sec" id="s-couple">
+    <div class="wrap wrap-narrow">
+      <div class="sec-head reveal">
+        <p class="kicker"><span class="k-no">01</span><span id="coupleKicker">我们俩</span></p>
+        <h2 class="sec-title" id="coupleTitle"></h2>
+        <p class="sec-sub" id="coupleSub"></p>
+      </div>
+
+      <div class="pair reveal" id="pair">
+        <div class="pair-side him" id="pairHim"></div>
+        <div class="pair-heart" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <defs>
+              <linearGradient id="heartGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#f7d0d4"/>
+                <stop offset=".5" stop-color="#e8a0a8"/>
+                <stop offset="1" stop-color="#d9bb93"/>
+              </linearGradient>
+            </defs>
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#heartGrad)"/>
+          </svg>
+        </div>
+        <div class="pair-side her" id="pairHer"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 封底页 -->
+  <section class="sec sec-finale" id="s-finale">
+    <div class="wrap wrap-narrow">
+      <div class="sec-head reveal">
+        <p class="kicker"><span class="k-no">02</span><span id="finaleKicker">最后一页，也是第一页</span></p>
+        <h2 class="finale-line reveal" id="finaleLine">往后的所有碎片，<br>我都想和你一起收集。</h2>
+        <p class="sec-sub reveal" id="finaleSub">故事还长，我们不急。</p>
+      </div>
+
+      <figure class="shot reveal" id="shot">
+        <div class="shot-frame">
+          <img id="shotImg" src="assets/our-photo.jpg" alt="我们的照片" draggable="false">
+          <span class="shot-gloss" aria-hidden="true"></span>
+        </div>
+        <figcaption id="shotCap">于是我们并肩站着，像本来就该这样。</figcaption>
+      </figure>
+
+      <p class="sign reveal" id="sign">—— 写给你的，第 1 页</p>
+      <button class="btn btn-ghost back reveal" type="button" id="backBtn">回到开头</button>
+    </div>
+
+    <footer class="foot" id="foot">我们的星页 · 只写给一个人看</footer>
+  </section>
+
+</main>
+
+<!-- ============ 大图 ============ -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lb-veil" data-close></div>
+  <figure class="lb-box">
+    <img id="lbImg" alt="">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button class="lb-close" type="button" data-close aria-label="关闭">✕</button>
+</div>
+
+<noscript>
+  <div class="noscript">这个页面需要开启 JavaScript 才能看到内容，在浏览器设置里打开它再刷新一次就好。</div>
+</noscript>
+
+<script src="js/content.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
