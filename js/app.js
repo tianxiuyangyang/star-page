@@ -495,8 +495,12 @@
     setText('#shotCap', F.caption || '');
     setText('#backBtn', F.backBtn || '回到开头');
     setText('#foot', S.footer || '');
+    // 小字留空就整块收掉（现在就是空的）
     var sub = $('#finaleSub');
-    if (sub && F.sub) sub.textContent = F.sub;
+    if (sub) {
+      sub.textContent = F.sub || '';
+      if (!sub.textContent.trim()) sub.hidden = true;
+    }
 
     var lineEl = $('#finaleLine');
     if (lineEl && F.line) lineEl.innerHTML = nl2br(F.line);
