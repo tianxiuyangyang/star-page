@@ -501,16 +501,29 @@
     var lineEl = $('#finaleLine');
     if (lineEl && F.line) lineEl.innerHTML = nl2br(F.line);
 
-    var img = $('#shotImg');
-    if (img) {
-      if (F.photo) img.src = F.photo;
-      img.alt = F.caption || '我们的照片';
-      img.addEventListener('error', function () {
-        var fr = img.parentNode;
-        if (!fr || fr.dataset.empty) return;
-        fr.dataset.empty = '1';
-        fr.innerHTML = '<div class="shot-empty">把照片放进 <b>assets/</b> 文件夹，<br>再改一下 <b>js/content.js</b> 里的 finale.photo 就好。</div>';
-      });
+    var box = $('#shots');
+    if (box) {
+      // 支持两种写法：photos 数组（多张）或单个 photo（一张）
+      var list = (F.photos && F.photos.length) ? F.photos : (F.photo ? [F.photo] : []);
+      if (!list.length) {
+        box.innerHTML = '<figure class="shot-frame" data-empty="1"><div class="shot-empty">' +
+          '把照片放进 <b>assets/</b> 文件夹，<br>再改一下 <b>js/content.js</b> 里的 finale.photos 就好。</div></figure>';
+      } else {
+        box.innerHTML = list.map(function (src) {
+          return '<figure class="shot-frame">' +
+                   '<img src="' + esc(src) + '" alt="' + esc(F.caption || '我们的照片') + '" loading="lazy" draggable="false">' +
+                   '<span class="shot-gloss" aria-hidden="true"></span>' +
+                 '</figure>';
+        }).join('');
+        $$('#shots img').forEach(function (im) {
+          im.addEventListener('error', function () {
+            var fr = im.parentNode;
+            if (!fr || fr.dataset.empty) return;
+            fr.dataset.empty = '1';
+            fr.innerHTML = '<div class="shot-empty">这张图没找到：<br><b>' + esc(im.getAttribute('src')) + '</b></div>';
+          });
+        });
+      }
     }
 
     var back = $('#backBtn');

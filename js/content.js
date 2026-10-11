@@ -49,8 +49,8 @@ window.SITE = {
     her: {
       symbol: "♀",          // 右侧符号
       label: "生日",
-      date: "2月2日",
-      sign: "处女座"
+      date: "7月19日",
+      sign: "巨蟹座"
     }
   },
 
@@ -61,7 +61,13 @@ window.SITE = {
     kicker: "最后一页，也是第一页",
     line: "往后的所有碎片，\n我都想和你一起收集。",
     sub: "故事还长，我们不急。",
-    photo: "assets/our-photo.jpg",
+    // 封底的照片：想加就往下继续加一行，想删就删掉那一行（全空着会显示一句提示）
+    photos: [
+      "assets/us-1.jpg",
+      "assets/us-2.jpg",
+      "assets/us-3.jpg",
+      "assets/us-4.jpg"
+    ],
     caption: "于是我们并肩站着，像本来就该这样。",
     sign: "—— 写给你的，第 1 页",
     backBtn: "回到开头"

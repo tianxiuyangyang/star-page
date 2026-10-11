@@ -388,42 +388,64 @@ body.entered #main{ opacity:1; }
   background:linear-gradient(120deg, #fff 10%, var(--rose) 62%, var(--gold));
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
-.shot{ margin:clamp(30px,6vh,52px) 0 0; position:relative; }
-.shot::before{
-  content:""; position:absolute; inset:-12% -6% -18%;
+/* =========================================================
+ *  5. 封底
+ * ========================================================= */
+.sec-finale{ padding-bottom:clamp(40px,8vh,70px); }
+.finale-line{
+  margin:0; font-weight:600;
+  font-size:clamp(21px,5.4vw,32px);
+  line-height:1.72; letter-spacing:.07em;
+  background:linear-gradient(120deg, #fff 10%, var(--rose) 62%, var(--gold));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+/* 相片墙：两列，手机上也是两列 */
+.shots-fig{ margin:clamp(30px,6vh,52px) 0 0; position:relative; }
+.shots-fig::before{
+  content:""; position:absolute; inset:-10% -5% -8%;
   background:radial-gradient(60% 60% at 50% 45%, rgba(232,160,168,.16), transparent 70%);
   filter:blur(28px); pointer-events:none;
 }
+.shots{
+  position:relative;
+  display:grid; gap:clamp(9px,2.2vw,14px);
+  grid-template-columns:repeat(2, 1fr);
+}
 .shot-frame{
-  position:relative; border-radius:18px; overflow:hidden;
-  aspect-ratio:20/9; cursor:zoom-in;
-  box-shadow:0 34px 70px -34px #000, 0 0 0 1px rgba(255,255,255,.08);
+  position:relative; margin:0; overflow:hidden;
+  border-radius:16px; aspect-ratio:3/2; cursor:zoom-in;
   background:#0a0c16;
+  box-shadow:0 24px 50px -32px #000, 0 0 0 1px rgba(255,255,255,.08);
+  transition:transform .55s var(--ease), box-shadow .55s var(--ease);
+}
+.shot-frame:hover{
+  transform:translateY(-4px);
+  box-shadow:0 32px 60px -32px #000, 0 0 0 1px rgba(232,160,168,.35);
 }
 .shot-frame img{
-  width:100%; height:100%; object-fit:cover; object-position:center 42%;
-  filter:saturate(1.02) contrast(1.02);
+  width:100%; height:100%; object-fit:cover; object-position:center 45%;
+  filter:saturate(1.03) contrast(1.02);
   transition:transform 1.4s var(--ease);
 }
-.shot:hover .shot-frame img{ transform:scale(1.025); }
+.shot-frame:hover img{ transform:scale(1.045); }
 .shot-gloss{
   position:absolute; inset:0; pointer-events:none;
-  background:linear-gradient(180deg, rgba(8,10,18,.06) 0%, rgba(8,10,18,.16) 55%, rgba(8,10,18,.58) 100%);
+  background:linear-gradient(180deg, rgba(8,10,18,.04) 0%, rgba(8,10,18,.10) 55%, rgba(8,10,18,.42) 100%);
 }
-/* 照片没放进来时的占位提示 */
-.shot-frame[data-empty]{ cursor:default; }
-.shot-empty{
-  position:absolute; inset:0; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:4px; padding:24px;
-  text-align:center; font-size:13px; line-height:2; letter-spacing:.06em;
-  color:var(--ink-3);
-  background:repeating-linear-gradient(135deg, rgba(255,255,255,.022) 0 10px, transparent 10px 20px);
-}
-.shot-empty b{ color:var(--ink-2); font-weight:600; }
-.shot figcaption{
+.shots-fig figcaption{
   margin:16px 0 0; text-align:center;
   font-size:13px; letter-spacing:.14em; color:var(--ink-2);
 }
+/* 照片没放好时的占位提示 */
+.shot-frame[data-empty]{ cursor:default; }
+.shot-empty{
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:4px; padding:16px;
+  text-align:center; font-size:12.5px; line-height:1.9; letter-spacing:.04em;
+  color:var(--ink-3);
+  background:repeating-linear-gradient(135deg, rgba(255,255,255,.022) 0 10px, transparent 10px 20px);
+}
+.shot-empty b{ color:var(--ink-2); font-weight:600; word-break:break-all; }
 .sign{
   margin:clamp(34px,7vh,60px) 0 0; text-align:center;
   font-family:var(--ffn); font-size:12.5px; letter-spacing:.26em; color:var(--ink-3);

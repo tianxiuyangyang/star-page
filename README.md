@@ -34,7 +34,7 @@ python -m http.server 8000
 | `couple.kicker` | 「我们俩」那栏左上角的小标签 |
 | `couple.title` / `couple.sub` | 那一栏的标题和小字；**留空就不显示**（现在就是空的） |
 | `couple.him` / `couple.her` | 左右两侧的符号、生日、星座 |
-| `finale.*` | 封底那句话、配文、署名、照片路径 |
+| `finale.*` | 封底那句话、配文、署名、照片列表 |
 | `footer` | 页脚那行小字 |
 
 ## 「我们俩」那一栏
@@ -48,7 +48,7 @@ couple: {
   title: "",        // 留空就不显示，想写标题填上字即可
   sub: "",          // 同上
   him: { symbol: "♂", label: "生日", date: "11月24日", sign: "射手座" },
-  her: { symbol: "♀", label: "生日", date: "2月2日",  sign: "处女座" }
+  her: { symbol: "♀", label: "生日", date: "7月19日", sign: "巨蟹座" }
 }
 ```
 
@@ -56,13 +56,26 @@ couple: {
 - 想左右对调：把 `him` 和 `her` 里的内容互换。
 - 手机上这一栏会自动竖过来，变成 ♂ → ♥ → ♀ 的顺序。
 
-## 换成自己的照片
+## 封底的照片墙（换成自己的照片）
 
-1. 把图片丢进 `assets/` 文件夹（横版最好，1600px 宽左右）。
-2. 改 `js/content.js` 里 `finale.photo` 的路径，例如 `"assets/我们的照片.jpg"`。
-3. 照片没放好也不会白屏——封底会显示一句提示，告诉你该改哪里。
+封底是 2×2 的照片墙，图片都写在 `js/content.js` 的 `finale.photos` 里：
 
-> 现在封底用的是 `assets/our-photo.jpg`（已从原图压到 1600×720、82KB，方便手机加载）。
+```js
+photos: [
+  "assets/us-1.jpg",   // 想加就继续往下加一行
+  "assets/us-2.jpg",
+  "assets/us-3.jpg",
+  "assets/us-4.jpg"
+],
+```
+
+1. 把图片丢进 `assets/` 文件夹，横版最好（1200~1600px 宽），会自动居中裁成 3:2 填满格子。
+2. 在 `photos` 里写路径，一行一张。只留一张也行；全删掉（`[]`）会显示一句提示。
+3. 每张都开了懒加载，滚动到封底才开始下载，不影响首屏速度。
+4. 哪张路径写错了，只有那一格显示提示，不会白屏。
+
+> 现在这四张是 `us-1.jpg`（秋树下）、`us-2.jpg`（夜里池边）、`us-3.jpg`（房间）、`us-4.jpg`（水里），
+> 都已压到 1400px 宽、四张合计约 440KB。
 
 ## 文件结构
 
@@ -71,11 +84,11 @@ index.html          页面结构
 css/style.css       全部样式（配色、星空、卡片、我们俩、动效）
 js/content.js       ★ 所有文字内容，只改这个文件
 js/app.js           交互：星空、进入、我们俩、飘心、音效、大图、章节导航
-assets/our-photo.jpg 封底照片
+assets/us-1..4.jpg   封底照片墙的 4 张图
 deploy.ps1          一键部署到 GitHub Pages
 ```
 
-整站约 135 KB（其中照片 82 KB），不请求任何外部资源，打开很快。
+整站约 500 KB（其中 4 张照片 440 KB，且都是懒加载），不请求任何外部资源。
 
 ## 交互一览
 
@@ -93,6 +106,8 @@ deploy.ps1          一键部署到 GitHub Pages
 - **封面标题字号**：`.cover-line` 的 `font-size`。
 - **我们俩的排版**：`.pair` 那一段；`@media (max-width:559px)` 里控制手机上竖排。
 - **爱心大小**：`.pair-heart` 的 `width`。
+- **照片墙列数**：`.shots` 的 `grid-template-columns`（默认 2 列；手机上也是 2 列）。
+- **照片墙每格比例**：`.shot-frame` 的 `aspect-ratio`（默认 3:2）。
 - **圆角 / 卡片**：`:root` 里的 `--radius`、`--card`。
 - 已适配手机、刘海屏安全区，以及系统"减少动态效果"偏好（开了之后动画会自动安静下来）。
 
